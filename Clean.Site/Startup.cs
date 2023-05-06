@@ -1,4 +1,5 @@
 using System;
+using Clean.Site.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -45,6 +46,8 @@ namespace Clean.Site
                 .AddComposers()
                 .Build();
 #pragma warning restore IDE0022 // Use expression body for methods
+            services.AddTransient<IHomeService, HomeService>();
+            services.AddTransient<ICardService, CardService>();
 
         }
 

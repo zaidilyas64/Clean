@@ -1,5 +1,16 @@
-﻿@{
-	Layout = "Layout.cshtml";
+﻿@model Clean.Site.Models.HomeModel
+@{
+    Layout = "Layout.cshtml";
+    ViewBag.Title = Model.Title;
 }
 
-<h1>@ViewBag.title</h1>
+<h1>@Model.Title</h1>
+
+@if (Model.Components != null && Model.Components.Any())
+{
+    foreach (var item in Model.Components)
+    {
+        @*Html.Action(item.ContentType.Alias, item.ContentType.Alias, new { source = item })*@
+        await Html.PartialAsync("_Card", item as Clean.Site.Models.Components.CardModel);
+    }
+}
