@@ -48,6 +48,7 @@ namespace Clean.Site
 #pragma warning restore IDE0022 // Use expression body for methods
             services.AddTransient<IHomeService, HomeService>();
             services.AddTransient<ICardService, CardService>();
+            services.AddTransient<IArticleListingService, ArticleListingService>();
 
         }
 

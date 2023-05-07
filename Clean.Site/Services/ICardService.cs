@@ -1,6 +1,7 @@
 ﻿using Clean.Site.Extensions;
 using Clean.Site.Models.Components;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using Umbraco.Extensions;
 
 namespace Clean.Site.Services
 {
@@ -16,7 +17,8 @@ namespace Clean.Site.Services
             if (source == null) return null;
 
             CardModel model = new CardModel();
-            model.Image = source.GetFieldValue("image") as string;
+            model.Title = source.GetFieldValue("title") as string;
+            model.Image = ((IPublishedContent)source.GetFieldValue("image")).MediaUrl();
 
             return model;
         }

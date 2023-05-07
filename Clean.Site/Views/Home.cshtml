@@ -1,4 +1,5 @@
 ﻿@model Clean.Site.Models.HomeModel
+@inject Microsoft.AspNetCore.Mvc.ViewComponents.IViewComponentSelector selector
 @{
     Layout = "Layout.cshtml";
     ViewBag.Title = Model.Title;
@@ -10,7 +11,13 @@
 {
     foreach (var item in Model.Components)
     {
-        @*Html.Action(item.ContentType.Alias, item.ContentType.Alias, new { source = item })*@
-        await Html.PartialAsync("_Card", item as Clean.Site.Models.Components.CardModel);
+        @if (selector.SelectComponent(item.ContentType.Alias.ToFirstUpper()) != null)
+        {
+            @await Component.InvokeAsync(item.ContentType.Alias.ToFirstUpper(), item)
+        }
+        else
+        {
+            <p>No rendering found.</p>
+        }
     }
 }
